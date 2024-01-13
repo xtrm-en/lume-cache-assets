@@ -1,2 +1,3 @@
 # lume-cache-assets
-@lumeland plugin that allows caching remote assets locally
+
+[Lume](https://lume.land) plugin that allows caching remote assets locally
