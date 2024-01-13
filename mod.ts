@@ -3,7 +3,6 @@ import Site from "lume/core/site.ts";
 import { Page } from "lume/core/file.ts";
 import { concurrent } from "lume/core/utils/concurrent.ts";
 import { sha1 } from "https://deno.land/x/sha1@v1.0.3/mod.ts";
-import process from "https://deno.land/std@0.162.0/node/process.ts";
 
 interface Options {
   /**
@@ -50,6 +49,7 @@ export const defaults: Options = {
 export default function cacheContent(userOptions?: Options) {
   const options = merge(defaults, userOptions);
   const generated = new Set<string>();
+  const encoder = new TextEncoder();
 
   async function replace(
     site: Site,
@@ -67,7 +67,7 @@ export default function cacheContent(userOptions?: Options) {
     const path = `/${folder}/${hash}.${extension}`;
     if (!generated.has(path)) {
       generated.add(path);
-      process.stdout.write(`Caching ${url} in ${path}\r`);
+      Deno.writeSync(Deno.stdout.rid, encoder.encode(`Caching ${url} in ${path}\r`));
       const res = await fetch(url);
       const page = Page.create({
         url: path,
@@ -145,7 +145,7 @@ export default function cacheContent(userOptions?: Options) {
           }
         });
         const { columns } = Deno.consoleSize();
-        process.stdout.write(" ".repeat(columns) + "\r");
+        Deno.writeSync(Deno.stdout.rid, encoder.encode(" ".repeat(columns) + "\r"));
       },
     );
   };
