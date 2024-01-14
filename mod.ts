@@ -18,6 +18,14 @@ interface Options {
   shouldCache?: (url: string) => boolean;
 
   /**
+   * Transforms the URL into a hashed version for local storage use.
+   * @param url The URL to transform.
+   * @returns A file-system-compatible string.
+   * @default (url: string) => sha1(url)
+   */
+  transform?: (url: string) => string;
+
+  /**
    * The folder where the images will be cached.
    * @default "cache"
    */
@@ -38,6 +46,7 @@ export const defaults: Options = {
       url.endsWith(ext)
     ),
   folder: "cache",
+  transform: (url: string) => sha1(url, "utf-8", "hex").toString(),
   logOutput: true,
 };
 
@@ -61,10 +70,11 @@ export default function cacheContent(userOptions?: Options) {
     if (!options.shouldCache!(url)) {
       return url;
     }
-    const extension = url.split(".").pop()!;
-    const hash = sha1(url, "utf8", "hex");
+    const hash = options.transform!(url);
     const folder = options.folder!.replace(/\/$/, "");
+    const extension = url.split(".").pop()!;
     const path = `/${folder}/${hash}.${extension}`;
+    // Don't download the same file twice
     if (!generated.has(path)) {
       generated.add(path);
       Deno.writeSync(Deno.stdout.rid, encoder.encode(`Caching ${url} in ${path}\r`));
