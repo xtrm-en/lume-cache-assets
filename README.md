@@ -8,7 +8,7 @@ Import this plugin in your `_config.ts` file to use it:
 
 ```ts
 import lume from "https://deno.land/x/lume/mod.ts";
-import cacheAssets from "https://deno.land/x/lume_cache_assets@0.0.8/mod.ts";
+import cacheAssets from "https://deno.land/x/lume_cache_assets@0.0.9/mod.ts";
 
 const site = lume();
 
@@ -60,7 +60,7 @@ interface Options {
 ```ts
 
 import lume from "https://deno.land/x/lume/mod.ts";
-import cacheAssets from "https://deno.land/x/lume_cache_assets@0.0.8/mod.ts";
+import cacheAssets from "https://deno.land/x/lume_cache_assets@0.0.9/mod.ts";
 
 import md5 from 'npm:md5';
 
@@ -82,6 +82,8 @@ export default site;
 glad you asked.
 
 ![demo](https://github.com/xtrm-en/lume-cache-assets/assets/26600206/7c4f862f-2761-4d3e-9d86-e6b3a11b6c8f)
+
+fun fact: `logOutput` breaks cloudflare pages
 
 ## License
 

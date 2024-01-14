@@ -77,7 +77,9 @@ export default function cacheContent(userOptions?: Options) {
     // Don't download the same file twice
     if (!generated.has(path)) {
       generated.add(path);
-      Deno.writeSync(Deno.stdout.rid, encoder.encode(`Caching ${url} in ${path}\r`));
+	  if (options.logOutput) {
+	  	Deno.writeSync(Deno.stdout.rid, encoder.encode(`Caching ${url} in ${path}\r`));
+	  }
       const res = await fetch(url);
       const page = Page.create({
         url: path,
@@ -154,8 +156,10 @@ export default function cacheContent(userOptions?: Options) {
             );
           }
         });
-        const { columns } = Deno.consoleSize();
-        Deno.writeSync(Deno.stdout.rid, encoder.encode(" ".repeat(columns) + "\r"));
+		if (options.logOutput) {
+          const { columns } = Deno.consoleSize();
+          Deno.writeSync(Deno.stdout.rid, encoder.encode(" ".repeat(columns) + "\r"));
+		}
       },
     );
   };
