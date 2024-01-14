@@ -77,6 +77,12 @@ site.use(cacheAssets({
 export default site;
 ```
 
+### wait what's `logOutput`?
+
+glad you asked.
+
+![demo](https://github.com/xtrm-en/lume-cache-assets/assets/26600206/7c4f862f-2761-4d3e-9d86-e6b3a11b6c8f)
+
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
