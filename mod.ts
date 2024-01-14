@@ -35,7 +35,7 @@ interface Options {
    * Whether to log the output or not.
    * @default true
    */
-  logOutput: boolean;
+  logOutput?: boolean;
 }
 
 export const defaults: Options = {
