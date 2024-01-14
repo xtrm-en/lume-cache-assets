@@ -8,7 +8,7 @@ Import this plugin in your `_config.ts` file to use it:
 
 ```ts
 import lume from "https://deno.land/x/lume/mod.ts";
-import cacheAssets from "https://deno.land/x/lume_cache_assets@0.0.7/mod.ts";
+import cacheAssets from "https://deno.land/x/lume_cache_assets@0.0.8/mod.ts";
 
 const site = lume();
 
@@ -60,7 +60,7 @@ interface Options {
 ```ts
 
 import lume from "https://deno.land/x/lume/mod.ts";
-import cacheAssets from "https://deno.land/x/lume_cache_assets@0.0.7/mod.ts";
+import cacheAssets from "https://deno.land/x/lume_cache_assets@0.0.8/mod.ts";
 
 import md5 from 'npm:md5';
 
